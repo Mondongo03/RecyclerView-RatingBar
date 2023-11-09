@@ -14,10 +14,9 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 
 import com.example.recyclerview.databinding.FragmentMostrarElementoBinding;
-import com.example.recyclerview.databinding.FragmentRecyclerElementosBinding;
 
 
-public class MostrarElementoFragment extends Fragment {
+public class MostrarPirataFragment extends Fragment {
     private FragmentMostrarElementoBinding binding;
 
     @Override
@@ -34,18 +33,19 @@ public class MostrarElementoFragment extends Fragment {
 
         ElementosViewModel elementosViewModel = new ViewModelProvider(requireActivity()).get(ElementosViewModel.class);
 
-        elementosViewModel.seleccionado().observe(getViewLifecycleOwner(), new Observer<Elemento>() {
+        elementosViewModel.seleccionado().observe(getViewLifecycleOwner(), new Observer<Pirata>() {
             @Override
-            public void onChanged(Elemento elemento) {
-                binding.nombre.setText(elemento.nombre);
-                binding.descripcion.setText(elemento.descripcion);
-                binding.valoracion.setRating(elemento.valoracion);
+            public void onChanged(Pirata pirata) {
+                binding.nombre.setText(pirata.nombre);
+                binding.descripcion.setText(pirata.descripcion);
+                binding.rol.setText(pirata.rol);
+                binding.valoracion.setRating(pirata.peligrosidad);
 
                 binding.valoracion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         if(fromUser){
-                            elementosViewModel.actualizar(elemento, rating);
+                            elementosViewModel.actualizar(pirata, rating);
                         }
                     }
                 });

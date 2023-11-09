@@ -1,12 +1,14 @@
 package com.example.recyclerview;
 
-public class Elemento {
+public class Pirata {
     String nombre;
     String descripcion;
-    float valoracion;
+    float peligrosidad;
+    String rol;
 
-    public Elemento(String nombre, String descripcion) {
+    public Pirata(String nombre, String descripcion, String rol) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.rol = rol;
     }
 }

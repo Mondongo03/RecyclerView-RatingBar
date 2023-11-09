@@ -38,8 +38,8 @@ public class NuevoElementoFragment extends Fragment {
             public void onClick(View v) {
                 String nombre = binding.nombre.getText().toString();
                 String descripcion = binding.descripcion.getText().toString();
-
-                elementosViewModel.insertar(new Elemento(nombre, descripcion));
+                String rol = binding.rol.getText().toString();
+                elementosViewModel.insertar(new Pirata(nombre, descripcion, rol));
 
                 navController.popBackStack();
             }

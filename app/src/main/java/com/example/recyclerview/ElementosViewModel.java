@@ -10,54 +10,54 @@ import java.util.List;
 
 public class ElementosViewModel extends AndroidViewModel {
 
-    ElementosRepositorio elementosRepositorio;
-    MutableLiveData<Elemento> elementoSeleccionado = new MutableLiveData<>();
+    PiratasRepositorio piratasRepositorio;
+    MutableLiveData<Pirata> elementoSeleccionado = new MutableLiveData<>();
 
-    MutableLiveData<List<Elemento>> listElementosMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<List<Pirata>> listElementosMutableLiveData = new MutableLiveData<>();
 
     public ElementosViewModel(@NonNull Application application) {
         super(application);
 
-        elementosRepositorio = new ElementosRepositorio();
+        piratasRepositorio = new PiratasRepositorio();
 
-        listElementosMutableLiveData.setValue(elementosRepositorio.obtener());
+        listElementosMutableLiveData.setValue(piratasRepositorio.obtener());
     }
 
-    MutableLiveData<List<Elemento>> obtener(){
+    MutableLiveData<List<Pirata>> obtener(){
         return listElementosMutableLiveData;
     }
 
-    void insertar(Elemento elemento){
-        elementosRepositorio.insertar(elemento, new ElementosRepositorio.Callback() {
+    void insertar(Pirata pirata){
+        piratasRepositorio.insertar(pirata, new PiratasRepositorio.Callback() {
             @Override
-            public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+            public void cuandoFinalice(List<Pirata> piratas) {
+                listElementosMutableLiveData.setValue(piratas);
             }
         });
     }
 
-    void eliminar(Elemento elemento){
-        elementosRepositorio.eliminar(elemento, new ElementosRepositorio.Callback() {
+    void eliminar(Pirata pirata){
+        piratasRepositorio.eliminar(pirata, new PiratasRepositorio.Callback() {
             @Override
-            public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+            public void cuandoFinalice(List<Pirata> piratas) {
+                listElementosMutableLiveData.setValue(piratas);
             }
         });
     }
 
-    void actualizar(Elemento elemento, float valoracion){
-        elementosRepositorio.actualizar(elemento, valoracion, new ElementosRepositorio.Callback() {
+    void actualizar(Pirata pirata, float valoracion){
+        piratasRepositorio.actualizar(pirata, valoracion, new PiratasRepositorio.Callback() {
             @Override
-            public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+            public void cuandoFinalice(List<Pirata> piratas) {
+                listElementosMutableLiveData.setValue(piratas);
             }
         });
     }
-    void seleccionar(Elemento elemento){
-        elementoSeleccionado.setValue(elemento);
+    void seleccionar(Pirata pirata){
+        elementoSeleccionado.setValue(pirata);
     }
 
-    MutableLiveData<Elemento> seleccionado(){
+    MutableLiveData<Pirata> seleccionado(){
         return elementoSeleccionado;
     }
 }

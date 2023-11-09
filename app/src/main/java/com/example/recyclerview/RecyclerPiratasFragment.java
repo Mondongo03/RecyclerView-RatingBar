@@ -22,7 +22,7 @@ import com.example.recyclerview.databinding.ViewholderElementoBinding;
 
 import java.util.List;
 
-public class RecyclerElementosFragment extends Fragment {
+public class RecyclerPiratasFragment extends Fragment {
 
     private FragmentRecyclerElementosBinding binding;
     private ElementosViewModel elementosViewModel;
@@ -44,10 +44,10 @@ public class RecyclerElementosFragment extends Fragment {
 
         ElementosAdapter elementosAdapter = new ElementosAdapter();
         binding.recyclerView.setAdapter(elementosAdapter);
-        elementosViewModel.obtener().observe(getViewLifecycleOwner(), new Observer<List<Elemento>>() {
+        elementosViewModel.obtener().observe(getViewLifecycleOwner(), new Observer<List<Pirata>>() {
             @Override
-            public void onChanged(List<Elemento> elementos) {
-                elementosAdapter.establecerLista(elementos);
+            public void onChanged(List<Pirata> piratas) {
+                elementosAdapter.establecerLista(piratas);
             }
         });
 
@@ -71,8 +71,8 @@ public class RecyclerElementosFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int posicion = viewHolder.getAdapterPosition();
-                Elemento elemento = elementosAdapter.obtenerElemento(posicion);
-                elementosViewModel.eliminar(elemento);
+                Pirata pirata = elementosAdapter.obtenerElemento(posicion);
+                elementosViewModel.eliminar(pirata);
 
             }
         }).attachToRecyclerView(binding.recyclerView);
@@ -87,7 +87,7 @@ public class RecyclerElementosFragment extends Fragment {
     }
     class ElementosAdapter extends RecyclerView.Adapter<ElementoViewHolder> {
 
-        List<Elemento> elementos;
+        List<Pirata> piratas;
 
         @NonNull
         @Override
@@ -98,22 +98,22 @@ public class RecyclerElementosFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ElementoViewHolder holder, int position) {
 
-            Elemento elemento = elementos.get(position);
+            Pirata pirata = piratas.get(position);
 
-            holder.binding.nombre.setText(elemento.nombre);
-            holder.binding.valoracion.setRating(elemento.valoracion);
+            holder.binding.nombre.setText(pirata.nombre);
+            holder.binding.valoracion.setRating(pirata.peligrosidad);
             holder.binding.valoracion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                     if(fromUser) {
-                        elementosViewModel.actualizar(elemento, rating);
+                        elementosViewModel.actualizar(pirata, rating);
                     }
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    elementosViewModel.seleccionar(elemento);
+                    elementosViewModel.seleccionar(pirata);
                     navController.navigate(R.id.action_recyclerElementosFragment_to_mostrarElementoFragment);
                 }
             });
@@ -122,15 +122,15 @@ public class RecyclerElementosFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return elementos != null ? elementos.size() : 0;
+            return piratas != null ? piratas.size() : 0;
         }
 
-        public void establecerLista(List<Elemento> elementos){
-            this.elementos = elementos;
+        public void establecerLista(List<Pirata> piratas){
+            this.piratas = piratas;
             notifyDataSetChanged();
         }
-        public Elemento obtenerElemento(int posicion){
-            return elementos.get(posicion);
+        public Pirata obtenerElemento(int posicion){
+            return piratas.get(posicion);
         }
     }
 }

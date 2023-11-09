@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recyclerElementosFragment"
-        android:name="com.example.recyclerview.RecyclerElementosFragment"
+        android:name="com.example.recyclerview.RecyclerPiratasFragment"
         android:label="fragment_recycler_elementos"
         tools:layout="@layout/fragment_recycler_elementos" >
         <action
@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_nuevo_elemento" />
     <fragment
         android:id="@+id/mostrarElementoFragment"
-        android:name="com.example.recyclerview.MostrarElementoFragment"
+        android:name="com.example.recyclerview.MostrarPirataFragment"
         android:label="fragment_mostrar_elemento"
         tools:layout="@layout/fragment_mostrar_elemento" />
 </navigation>
